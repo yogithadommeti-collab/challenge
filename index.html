@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>World Water Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #0277bd;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            background: #0277bd;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%;
+        }
+
+        .stat h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .stat p {
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>World Water Resources Dashboard</h1>
+        <p>Overview of Global Water Availability & Usage</p>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <h2>1.386B km³</h2>
+                <p>Total Water on Earth</p>
+            </div>
+            <div class="stat">
+                <h2>2.5%</h2>
+                <p>Fresh Water</p>
+            </div>
+            <div class="stat">
+                <h2>70%</h2>
+                <p>Used in Agriculture</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Global Water Usage by Sector</h2>
+            <canvas id="usageChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Water Resources per Continent</h2>
+            <canvas id="resourcesChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const usageCtx = document.getElementById('usageChart').getContext('2d');
+        const usageChart = new Chart(usageCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Agriculture', 'Industry', 'Domestic'],
+                datasets: [{
+                    label: 'Water Usage',
+                    data: [70, 20, 10],
+                    backgroundColor: ['#0277bd', '#0288d1', '#03a9f4']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        const resourcesCtx = document.getElementById('resourcesChart').getContext('2d');
+        const resourcesChart = new Chart(resourcesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania'],
+                datasets: [{
+                    label: 'Freshwater Resources (km³)',
+                    data: [10000, 40000, 12000, 18000, 25000, 5000],
+                    backgroundColor: '#0277bd'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
